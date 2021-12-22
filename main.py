@@ -55,7 +55,7 @@ class SVM:
         # J = (0.0001/2) * np.dot(theta, theta) + hinge_loss
         return J
 
-    def calc_gradient(self, X_i, y_i, theta, C, N):
+    def calc_gradient(self, X_i, y_i, theta, N):
         if (type(y_i)) == np.float64:
             X_i = np.array([X_i])
             y_i = np.array([y_i])
@@ -80,7 +80,7 @@ class SVM:
         self.optimized_theta = np.zeros(X.shape[1])
         for epoch in range(1, self.epochs):
             for i, x_i in enumerate(X):
-                grad = self.calc_gradient(x_i, y[i], self.optimized_theta, self.C, len(y))
+                grad = self.calc_gradient(x_i, y[i], self.optimized_theta, len(y))
                 self.optimized_theta = self.optimized_theta - (self.lr * grad)
 
             print(f'Epoch: {epoch} || Cost: {self.compute_cost(X, y, self.optimized_theta)}')
